@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+
+
+    <context:component-scan base-package="spring.conf" />
+
+<!--    <tx:annotation-driven transaction-manager="transactionManager" />-->
+
+    <context:component-scan base-package="user.bean" />
+    <context:component-scan base-package="user.dao" />
+    <context:component-scan base-package="user.main" />
+    <context:component-scan base-package="user.service" />
+
+
+    <bean id="helloSpring" class="user.main.HelloSpring"/>
+
+    <bean id="userInsertService" class="user.service.UserInsertService">
+        <property name="userDTO" ref="userDTO" />
+    </bean>
+    <bean id="userSelectService" class="user.service.UserSelectService">
+        <property name="userDAO" ref="userDAOImpl" />
+    </bean>
+    <bean id="userUpdateService" class="user.service.UserUpdateService"/>
+    <bean id="userDeleteService" class="user.service.UserDeleteService"/>
+
+
+    <bean id="userDTO" class="user.bean.UserDTO"/>
+    <bean id="userDAOImpl" class="user.dao.UserDAOImpl">
+
+    </bean>
+</beans>
